@@ -1,15 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import About from "./Pages/About";
 import Profile from "./Pages/Profile";
 import Header from "./Components/Header";
+import { EstateState } from "./context/EstateProvider";
 
 function App() {
+  const { user } = EstateState();
+  console.log(user);
   return (
-    <BrowserRouter>
-      <Header />
+    <>
+      {user && <Header data={user} />}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/sign-in" element={<SignIn />} />
@@ -17,7 +20,7 @@ function App() {
         <Route exact path="/about" element={<About />} />
         <Route exact path="/profile" element={<Profile />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

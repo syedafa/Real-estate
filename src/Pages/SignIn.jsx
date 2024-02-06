@@ -34,7 +34,8 @@ function SignIn() {
         setLoading(false);
         return;
       }
-      setUser(data);
+      localStorage.setItem("loggedInUser", JSON.stringify(data));
+      setUser(JSON.parse(localStorage.getItem("loggedInUser")));
       setLoading(false);
       navigate("/");
     } catch (error) {
@@ -49,7 +50,7 @@ function SignIn() {
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
+      <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
       <form className="flex flex-col gap-4" onSubmit={submitHandler}>
         <input
           type="email"

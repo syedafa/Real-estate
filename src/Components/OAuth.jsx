@@ -24,7 +24,9 @@ function OAuth() {
       });
       const data = await res.json();
       console.log(data);
-      setUser(data);
+
+      localStorage.setItem("loggedInUser", JSON.stringify(data));
+      setUser(JSON.parse(localStorage.getItem("loggedInUser")));
       navigate("/");
     } catch (error) {
       console.log("could not sign in with google", error);

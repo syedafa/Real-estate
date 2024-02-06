@@ -1,7 +1,10 @@
+/* eslint-disable react/prop-types */
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ data }) {
+  // console.log(data);
+  const { avathar } = data;
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -31,8 +34,13 @@ function Header() {
               About
             </li>
           </Link>
-          <Link to="/sign-in">
-            <li className="hover:underline text-slate-700">Sign In</li>
+          <Link to="/profile">
+            <img
+              src={avathar}
+              alt=""
+              className="rounded-full object-cover h-7 w-7"
+            />
+            {/* <li className="hover:underline text-slate-700">{username}</li> */}
           </Link>
         </ul>
       </div>

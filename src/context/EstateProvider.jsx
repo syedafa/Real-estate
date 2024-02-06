@@ -1,18 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 const EstateContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const EstateProvider = ({ children }) => {
   const [user, setUser] = useState();
-  // const navigate=useNavigate()
-  // useEffect(() => {
-  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  //   setUser(userInfo);
-  //   if (!userInfo) {
-  //     navigate("/");
-  //   }
-  // }, [navigate]);
+  // const navigate = useNavigate();
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("loggedInUser")));
+  }, []);
+
   return (
     <EstateContext.Provider value={{ user, setUser }}>
       {children}
