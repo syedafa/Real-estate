@@ -6,6 +6,7 @@ import About from "./Pages/About";
 import Profile from "./Pages/Profile";
 import Header from "./Components/Header";
 import { EstateState } from "./context/EstateProvider";
+import CreateList from "./Pages/CreateList";
 
 function App() {
   const { user } = EstateState();
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/create-listing" element={<CreateList />} />
       </Routes>
     </>
   );
