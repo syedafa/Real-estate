@@ -10,7 +10,7 @@ import CreateList from "./Pages/CreateList";
 
 function App() {
   const { user } = EstateState();
-  console.log(user);
+
   return (
     <>
       {user && <Header data={user} />}

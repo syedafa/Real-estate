@@ -1,13 +1,18 @@
+/* eslint-disable react/prop-types */
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase";
 import { EstateState } from "../context/EstateProvider";
 import { useNavigate } from "react-router";
+// import { useState } from "react";
 
-function OAuth() {
+function OAuth({ setError, setLoading }) {
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
   const { setUser } = EstateState();
   const navigate = useNavigate();
   const handleGoogleAuth = async () => {
     try {
+      setLoading(true);
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
@@ -24,12 +29,19 @@ function OAuth() {
       });
       const data = await res.json();
       console.log(data);
-
+      if (data.success === false) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
       localStorage.setItem("loggedInUser", JSON.stringify(data));
       setUser(JSON.parse(localStorage.getItem("loggedInUser")));
       navigate("/");
+      setLoading(false);
     } catch (error) {
       console.log("could not sign in with google", error);
+      setError(error);
+      setLoading(false);
     }
   };
   return (

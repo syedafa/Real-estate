@@ -28,7 +28,7 @@ function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      // console.log(data);
+      console.log(data);
       if (data.success === false) {
         setError(data.message);
         setLoading(false);
@@ -74,7 +74,7 @@ function SignIn() {
         >
           Sign In
         </button>
-        <OAuth />
+        <OAuth setError={setError} setLoading={setLoading} />
       </form>
       <div className="flex gap-2 mt-5">
         <p>Dont have an account?</p>
