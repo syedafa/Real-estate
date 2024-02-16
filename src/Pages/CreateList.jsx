@@ -7,9 +7,11 @@ import {
 import { useState } from "react";
 import { app } from "../firebase";
 import { EstateState } from "../context/EstateProvider";
+import { useNavigate } from "react-router-dom";
 
 function CreateList() {
   const { user } = EstateState();
+  const navigate = useNavigate();
   console.log(user);
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
@@ -141,6 +143,7 @@ function CreateList() {
         setLoading(false);
         return;
       }
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
