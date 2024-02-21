@@ -4,12 +4,15 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { app } from "../firebase";
 import { EstateState } from "../context/EstateProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function CreateList() {
+  const params = useParams();
+  console.log(params.id);
+
   const { user } = EstateState();
   const navigate = useNavigate();
   console.log(user);
@@ -28,6 +31,7 @@ function CreateList() {
     parking: false,
     furnished: false,
   });
+  console.log(formData);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -151,12 +155,57 @@ function CreateList() {
     }
     setLoading(false);
   };
+  const updateHandlesubmit = async (e) => {
+    e.preventDefault();
+    if (formData.imageUrls.length <= 0)
+      return setError("Atleast add one image");
+    if (+formData.regularPrice < +formData.discountPrice)
+      return setError("regular price must be greater than discount price");
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`/api/list/update-list/${formData._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, userRef: user._id }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data);
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+      navigate(`/listing/${data._id}`);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+      // console.log(error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const editingData = async () => {
+      const data = await fetch(`/api/list/get-listing/${params.id}`);
+      const res = await data.json();
+      console.log(res);
+      setFormData(res);
+    };
+    params.id && editingData();
+  }, []);
+
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
-        Create a Listing
+        {params.id ? "Update listing" : "Create a Listing"}
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+      <form
+        onSubmit={params.id ? updateHandlesubmit : handleSubmit}
+        className="flex flex-col sm:flex-row gap-4"
+      >
         <div className="flex flex-col gap-4 flex-1">
           <input
             type="text"
@@ -357,7 +406,13 @@ function CreateList() {
             disabled={loading || imageUploading}
             className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
           >
-            {loading ? "Creating list..." : "Create Listing"}
+            {loading
+              ? params.id
+                ? "updating list..."
+                : "Creating list..."
+              : params.id
+              ? "Update listing"
+              : "Create Listing"}
           </button>
           {error && <p className="text-red-700">{error}</p>}
         </div>
