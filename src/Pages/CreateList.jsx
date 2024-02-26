@@ -26,7 +26,7 @@ function CreateList() {
     bedrooms: 1,
     bathroom: 1,
     regularPrice: 50,
-    discountPrice: 50,
+    discountPrice: 0,
     offer: false,
     parking: false,
     furnished: false,
