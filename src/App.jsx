@@ -8,6 +8,7 @@ import Header from "./Components/Header";
 import { EstateState } from "./context/EstateProvider";
 import CreateList from "./Pages/CreateList";
 import Listing from "./Pages/Listing";
+import Search from "./Pages/Search";
 // import UpdateList from "./Pages/UpdateList";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/sign-in" element={<SignIn />} />
         <Route exact path="/sign-up" element={<SignUp />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/search" element={<Search />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/create-listing" element={<CreateList />} />
         <Route exact path="/update-listing/:id" element={<CreateList />} />

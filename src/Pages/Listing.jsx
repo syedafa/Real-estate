@@ -94,7 +94,7 @@ function Listing() {
               <span className="'font-semibold text-black">Description - </span>
               {listing.description}
             </p>
-            <ul className="text-green-900 font-semibold text-sm flex items-center gap-4 sm:gap-6 mb-10">
+            <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 mb-10">
               <li className="flex items-center gap-1 whitespace-nowrap">
                 <FaBed className="text-lg" />
                 {listing.bedrooms > 1
