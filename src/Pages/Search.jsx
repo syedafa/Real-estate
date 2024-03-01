@@ -46,7 +46,6 @@ function Search() {
       });
     }
     const fetchListings = async () => {
-      console.log("first");
       setShowMore(false);
       try {
         setLoading(true);
@@ -56,7 +55,7 @@ function Search() {
         if (data.length > 8) {
           setShowMore(true);
         }
-        console.log(data);
+
         setListing(data);
         setLoading(false);
       } catch (error) {
@@ -104,10 +103,10 @@ function Search() {
     urlParams.set("sort", sideBarData.sort);
     urlParams.set("order", sideBarData.order);
     const searchQuery = urlParams.toString();
-    console.log(searchQuery);
+
     navigate(`/search?${searchQuery}`);
   };
-  console.log(listing);
+
   const onshowMoreClick = async () => {
     const numberOfListings = listing.length;
     const startIndex = numberOfListings;
@@ -119,7 +118,7 @@ function Search() {
     if (data.length < 9) {
       setShowMore(false);
     }
-    console.log(data);
+
     setListing([...listing, ...data]);
   };
   return (

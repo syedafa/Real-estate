@@ -18,7 +18,7 @@ function Listing() {
   SwiperCore.use([Navigation]);
   const params = useParams();
   const { user } = EstateState();
-  console.log(user);
+
   const [listing, setListing] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -31,24 +31,20 @@ function Listing() {
         const res = await fetch(`/api/list/get-listing/${params.id}`);
         const data = await res.json();
         if (data.success === false) {
-          console.log("error");
           setError(true);
           setLoading(false);
           return;
         }
         setListing(data);
         setLoading(false);
-        console.log("not error");
       } catch (error) {
         setError(true);
         setLoading(false);
-        console.log("error in catch");
       }
     };
     getListing();
   }, []);
-  // console.log(listing);
-  // console.log(loading);
+
   return (
     <main>
       <div>{loading && <p>Loading...</p>}</div>

@@ -4,7 +4,6 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header({ data }) {
-  // console.log(data);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const { avathar } = data;

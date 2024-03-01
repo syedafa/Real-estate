@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate();
   const { user, setUser } = EstateState();
-  console.log(user);
+
   const [file, setFile] = useState(null);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -61,7 +61,7 @@ function Profile() {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(formData);
+
       if (formData.password.trim().length < 1) {
         setError("password feild is required !");
         setLoading(false);
@@ -74,9 +74,9 @@ function Profile() {
         },
         body: JSON.stringify(formData),
       });
-      // console.log(res);
+
       const data = await res.json();
-      console.log(data);
+
       if (data.success === false) {
         setError(data.message);
         setLoading(false);
@@ -92,8 +92,7 @@ function Profile() {
       setLoading(false);
     }
   };
-  console.log(formData);
-  console.log(error);
+
   const handleDeleteUser = async () => {
     try {
       setLoading(true);
@@ -137,7 +136,7 @@ function Profile() {
       setShowListingError(false);
       const res = await fetch(`/api/user/listings/${user._id}`);
       const data = await res.json();
-      console.log(data);
+
       if (data.success === false) {
         setShowListingError(true);
         return;
@@ -154,7 +153,6 @@ function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setShowListings((pre) => pre.filter((listing) => listing._id !== id));

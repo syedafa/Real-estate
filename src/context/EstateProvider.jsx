@@ -8,7 +8,6 @@ const EstateProvider = ({ children }) => {
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location.pathname);
   useEffect(() => {
     // setUser(JSON.parse(localStorage.getItem("loggedInUser")));
     const userInfo = JSON.parse(localStorage.getItem("loggedInUser"));

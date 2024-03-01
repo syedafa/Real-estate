@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { EstateState } from "../context/EstateProvider";
+
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
@@ -8,8 +8,6 @@ import "swiper/css/bundle";
 import ListingCard from "../Components/ListingCard";
 
 function Home() {
-  const { user } = EstateState();
-  console.log(user);
   const [offerListing, setOfferListing] = useState([]);
   const [saleListing, setSaleListing] = useState([]);
   const [rentListing, setRentListing] = useState([]);
@@ -46,9 +44,7 @@ function Home() {
     };
     fecthOffer();
   }, []);
-  console.log(rentListing);
-  console.log(offerListing);
-  console.log(saleListing);
+
   return (
     <div>
       {/* top section */}

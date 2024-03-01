@@ -11,11 +11,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function CreateList() {
   const params = useParams();
-  console.log(params.id);
 
   const { user } = EstateState();
   const navigate = useNavigate();
-  console.log(user);
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
@@ -31,7 +29,7 @@ function CreateList() {
     parking: false,
     furnished: false,
   });
-  console.log(formData);
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -82,14 +80,12 @@ function CreateList() {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             resolve(downloadURL);
-            console.log("entered resolve");
           });
         }
       );
     });
   };
-  console.log(formData);
-  console.log(imageUploadError);
+
   const handleImageRemove = (index) => {
     setFormData({
       ...formData,
@@ -142,7 +138,6 @@ function CreateList() {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data);
         setError(data.message);
         setLoading(false);
         return;
@@ -151,7 +146,6 @@ function CreateList() {
     } catch (error) {
       setError(error.message);
       setLoading(false);
-      // console.log(error);
     }
     setLoading(false);
   };
@@ -173,7 +167,6 @@ function CreateList() {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data);
         setError(data.message);
         setLoading(false);
         return;
@@ -182,7 +175,6 @@ function CreateList() {
     } catch (error) {
       setError(error.message);
       setLoading(false);
-      // console.log(error);
     }
     setLoading(false);
   };
@@ -191,7 +183,7 @@ function CreateList() {
     const editingData = async () => {
       const data = await fetch(`/api/list/get-listing/${params.id}`);
       const res = await data.json();
-      console.log(res);
+
       setFormData(res);
     };
     params.id && editingData();
