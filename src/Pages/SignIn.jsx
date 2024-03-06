@@ -82,6 +82,11 @@ function SignIn() {
           <span className="text-blue-700">Sign Up</span>
         </Link>
       </div>
+      <div className="flex gap-2 mt-5">
+        <Link to={"/forget-password"}>
+          <span className="text-blue-700">forgot password?</span>
+        </Link>
+      </div>
       {error && <p className="text-red-700">{error}</p>}
     </div>
   );

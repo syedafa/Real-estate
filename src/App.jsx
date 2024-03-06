@@ -9,6 +9,8 @@ import { EstateState } from "./context/EstateProvider";
 import CreateList from "./Pages/CreateList";
 import Listing from "./Pages/Listing";
 import Search from "./Pages/Search";
+import ForgetPassword from "./Pages/ForgetPassword";
+import ResetPassword from "./Pages/ResetPassword";
 // import UpdateList from "./Pages/UpdateList";
 
 function App() {
@@ -27,6 +29,12 @@ function App() {
         <Route exact path="/create-listing" element={<CreateList />} />
         <Route exact path="/update-listing/:id" element={<CreateList />} />
         <Route exact path="/listing/:id" element={<Listing />} />
+        <Route exact path="/forget-password" element={<ForgetPassword />} />
+        <Route
+          exact
+          path="/reset-password/:id/:token"
+          element={<ResetPassword />}
+        />
       </Routes>
     </>
   );

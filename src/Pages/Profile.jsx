@@ -11,14 +11,13 @@ import { Link, useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate();
   const { user, setUser } = EstateState();
-
+  console.log(user);
   const [file, setFile] = useState(null);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: user?.username,
+    email: user?.email,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -62,11 +61,11 @@ function Profile() {
     try {
       setLoading(true);
 
-      if (formData.password.trim().length < 1) {
-        setError("password feild is required !");
-        setLoading(false);
-        return;
-      }
+      // if (formData.password.trim().length < 1) {
+      //   setError("password feild is required !");
+      //   setLoading(false);
+      //   return;
+      // }
       const res = await fetch(`/api/user/update/${user._id}`, {
         method: "POST",
         headers: {
@@ -160,6 +159,7 @@ function Profile() {
       console.log(error.message);
     }
   };
+  console.log(formData);
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -206,13 +206,13 @@ function Profile() {
           defaultValue={user?.email}
           onChange={handleChange}
         />
-        <input
+        {/* <input
           type="password"
           placeholder="Password"
           id="password"
           className="border p-3 rounded-lg"
           onChange={handleChange}
-        />
+        /> */}
         {error && <p className="text-red-700">{error}</p>}
         <button
           disabled={loading}
