@@ -11,6 +11,7 @@ import Listing from "./Pages/Listing";
 import Search from "./Pages/Search";
 import ForgetPassword from "./Pages/ForgetPassword";
 import ResetPassword from "./Pages/ResetPassword";
+import VerifyPassword from "./Pages/VerifyPassword";
 // import UpdateList from "./Pages/UpdateList";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           path="/reset-password/:id/:token"
           element={<ResetPassword />}
         />
+        <Route exact path="/verify/:id/:token" element={<VerifyPassword />} />
       </Routes>
     </>
   );

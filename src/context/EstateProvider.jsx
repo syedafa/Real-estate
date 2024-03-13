@@ -23,6 +23,9 @@ const EstateProvider = ({ children }) => {
       } else if (location.pathname.includes("reset-password")) {
         console.log(location.pathname);
         return;
+      } else if (location.pathname.includes("verify")) {
+        console.log(location.pathname);
+        return;
       } else if (!userInfo) {
         return navigate("/sign-in");
       }

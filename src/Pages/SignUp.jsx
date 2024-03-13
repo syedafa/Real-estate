@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import OAuth from "../Components/OAuth";
 
 function SignUp() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const handleChange = (e) => {
+    setEmailSent(false);
     setError(null);
     setFormData({
       ...formData,
@@ -26,14 +28,15 @@ function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-
+      console.log(data);
       if (data.success === false) {
         setError(data.message);
         setLoading(false);
         return;
       }
       setLoading(false);
-      navigate("/sign-in");
+      setEmailSent(data);
+      // navigate("/sign-in");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -88,6 +91,7 @@ function SignUp() {
         </Link>
       </div>
       {error && <p className="text-red-700">{error}</p>}
+      {emailSent && <p className="text-green-700">{emailSent}</p>}
     </div>
   );
 }
