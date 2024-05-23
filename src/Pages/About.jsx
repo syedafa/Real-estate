@@ -59,7 +59,7 @@ function About() {
         excepturi itaque fuga dolorum. Quia, quaerat corrupti, ea animi unde
         expedita architecto officiis mollitia quasi commodi dolore error vero
         aperiam optio maiores soluta illum neque est dignissimos nemo quas
-        nesciunt incidunt impedit laudantium! Ad voluptatum corporis at
+        nesciunt incidunt impedit laudantium! Ad voluptatum corporis at wdwjdw
       </p>
     </div>
   );
